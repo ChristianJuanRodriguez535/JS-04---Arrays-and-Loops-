@@ -99,7 +99,10 @@ function onlineStatus(usuarios){
     for (let i2 = 0; i2 < usuarios.length; i2++){
 
         if (usuarios[i2].includes("online"))
+    
+            
             {
+
             usuariosOnline.push(usuarios[i2]);
         }
     }
@@ -151,4 +154,104 @@ function multiplosNumeros (numb, leng){
 
 console.log(multiplosNumeros(2,10));
 console.log(multiplosNumeros(17,6));
+
+//& Problema 6: Positive dominance in Array 
+
+//* Write a function to determine if an array is positively dominant. An array is positively dominant when the majority of elemets are positive. 
+
+const esPositDom = (arreglo) => {
+
+let posPositiva = [];
+let posNegativa = [];
+
+for (let i4 = 0; i4 < arreglo.length; i4++) {
+
+    if (arreglo[i4] > 0 && !posPositiva.includes(arreglo[i4])) 
+        {
+            //^ Usamos !posPositiva para que los valores positivos del arreglo se guarden en posPositiva
+
+        posPositiva.push(arreglo[i4]);
+
+  
+    } else if (arreglo[i4] < 0 && !posNegativa.includes(arreglo[i4])){
+
+        posNegativa.push(arreglo[i4]);
+    }
+} 
+
+const arregloPositivo = posPositiva.length;
+
+const arregNegativo = posNegativa.length;
+
+if (arregloPositivo === 0 && arregNegativo === 0){
+
+    return `[${arreglo}] No es ni positivamente dominante, ni negativamente dominante `
+  
+    
+}
+
+if (arregloPositivo > arregNegativo ) {//^ Compara la cantidad de valores que son positivos y negativos 
+
+return `[${arreglo}] Es positivamente dominante `
+
+}else {
+
+    return `[${arreglo}] No es positivamente dominante `
+
+   
+}
+
+};
+
+console.log(esPositDom([1,2,3]));
+console.log(esPositDom([-1,-3,-5, 4, 6767]));
+
+//& Problema 7 Antidopal Average 
+
+//* Given an array, retun a shorter array followinnng these steps:                                    1)Split the array into two equal parts*. If unequal, remove the middle element to obtain two equal arrays. 2)Sum each number of the first part with the inverse numbers of the second part. 3) Divide each number of the resulting array by 2.
+                   
+function antidopalAverage (arreglo2) {
+
+    if (arreglo2.length % 2 !== 0) {
+
+        arreglo2.splice(Math.floor(arreglo2.length/2),1);
+        
+        //todo) Math.floor redondea hacia abajo el resultado de la división, para tener un indice valido.
+
+        //& .splice (indice, cantidad) Modifica el arreglo original. El indice donde comenzara a eliminar elementos y cantidad a eliminar 
+    }
+  
+    const indiceMitad = arreglo2.length/2;
+    const primeraMitad = arreglo2.slice(0,indiceMitad)
+
+    const segundaMitad = arreglo2.slice(indiceMitad).reverse();
+
+    //* con slice(indiceMitad) esta extrayendo todos los elementos desde la mitad del arreglo hasta el final y con reverse se invierte el orden de los elementos.
+
+    const sumaArreglo2 = primeraMitad.map((num1, index1) => num1 + segundaMitad[index1] ) ;
+
+    //^ .map crea un nuevo arreglo con los resultados de aplicar una funcion al arreglo original
+
+    //todo) (num1, index1) => num1 + segundaMitad[index1] ) suma el elemento actual del arreglo primeraMitad con el elemento correspondiente segundaMitad
+
+    const arregloFinal = sumaArreglo2.map(num1 => num1/2);
+
+    return arregloFinal;
+}
+
+console.log(antidopalAverage([1,2,3,5,22,6]));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
